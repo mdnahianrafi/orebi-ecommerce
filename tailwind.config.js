@@ -15,7 +15,10 @@ export default {
         menuText: '#767676',
         menuTextHover: '#262626',
         categoryColor: '#F5F5F3',
-        placeHolderColor:'#C4C4C4'
+        placeHolderColor:'#C4C4C4',
+        productTextColor:'#767676',
+        productBg: '#D8D8D8',
+        arrowBg: '#979797',
       },
       width:
       {
