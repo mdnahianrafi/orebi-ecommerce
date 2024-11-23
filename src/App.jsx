@@ -21,10 +21,7 @@ import Cap from "../src/assets/cap.png";
 import TeaTable from "../src/assets/tea table.png";
 import Headphones from "../src/assets/headphones.png";
 import Sunglass from "../src/assets/sun glasses.png";
-import FooterLogo from "../src/assets/footer logo.png";
-import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import Header from "./components/layouts/Header";
-import Footer from "./components/layouts/Footer";
 function App() {
   const newArrivals = [
     {

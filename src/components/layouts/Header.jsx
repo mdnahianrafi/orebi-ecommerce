@@ -13,42 +13,7 @@ import { SlideDown } from "react-slidedown";
 import "react-slidedown/lib/slidedown.css";
 
 const Header = () => {
-  const categoryDropRef = useRef(null); // Ref for category dropdown
-  const userDropRef = useRef(null); // Ref for user dropdown
-  const categoryButtonRef = useRef(null); // Ref for category button
-  const userButtonRef = useRef(null); // Ref for user button
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false); // Category dropdown open state
-  const [isUserOpen, setIsUserOpen] = useState(false); // User dropdown open state
 
-  // Handle toggle for category dropdown
-  const handleCategoryDrop = () => {
-    setIsCategoryOpen(!isCategoryOpen);
-  };
-
-  // Handle toggle for user dropdown
-  const handleUserDrop = () => {
-    setIsUserOpen(!isUserOpen);
-  };
-
-  // Close dropdowns when clicking outside
-  const handleClickOutside = (event) => {
-    if (
-      (categoryDropRef.current && !categoryDropRef.current.contains(event.target) && categoryButtonRef.current && !categoryButtonRef.current.contains(event.target)) ||
-      (userDropRef.current && !userDropRef.current.contains(event.target) && userButtonRef.current && !userButtonRef.current.contains(event.target))
-    ) {
-      setIsCategoryOpen(false);
-      setIsUserOpen(false);
-    }
-  };
-
-  // Set up event listener to detect clicks outside the dropdowns
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
 
   return (
     <>
