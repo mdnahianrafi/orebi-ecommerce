@@ -31,7 +31,7 @@ function PrevArrow(props) {
       }}
       onClick={onClick}
     >
-      <FaArrowLeft style={{ fontSize: "16px", color: "white"  }} />
+      <FaArrowLeft style={{ fontSize: "16px", color: "white" }} />
     </div>
   );
 }
@@ -76,6 +76,7 @@ const Products = ({ productData }) => {
   return (
     <div className="">
       <Slider {...settings}>
+    
         {productData.map((product, index) => (
           <Product
             key={index}
