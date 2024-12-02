@@ -2,7 +2,8 @@ import Container from "../components/Container";
 import Flex from "../components/Flex";
 import Image from "../components/Image";
 import Heading from "../components/Heading";
-import { FaUndoAlt, FaTruck, FaBeer } from "react-icons/fa"; // Corrected import
+import { FaUndoAlt, FaTruck } from "react-icons/fa"; // Corrected import
+import { Fa2 } from "react-icons/fa6";
 import AddOne from "../../src/assets/Phone sales.jpg";
 import AddTwo from "../../src/assets/Electronic sales.png";
 import AddThree from "../../src/assets/Furniture offers.jpg";
@@ -121,7 +122,7 @@ const Home = () => {
           <Flex className={"justify-center"}>
             <div className="w-1/3">
               <Flex className={"justify-center gap-x-2"}>
-                <FaBeer />
+              <Fa2  className="text-2xl"/>
                 <Heading
                   as="h1"
                   text="Two Years Warranty"

@@ -7,90 +7,112 @@ import { HiBars3BottomLeft } from "react-icons/hi2";
 import Heading from "../Heading";
 import { FaSearch, FaUser } from "react-icons/fa";
 import { VscTriangleDown } from "react-icons/vsc";
-import { FaCartShopping } from "react-icons/fa6";
-import { SlideDown } from "react-slidedown";
-import "react-slidedown/lib/slidedown.css";
+import { FaCartShopping  } from "react-icons/fa6";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  // State for dropdowns
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const [isUserOpen, setIsUserOpen] = useState(false);
+// State variables to manage the open/close status of the dropdowns
+const [isCategoryOpen, setIsCategoryOpen] = useState(false); // Category dropdown open/close state
+const [isUserOpen, setIsUserOpen] = useState(false); // User dropdown open/close state
 
-  // Refs for dropdowns and buttons
-  const categoryButtonRef = useRef(null);
-  const categoryDropRef = useRef(null);
-  const userButtonRef = useRef(null);
-  const userDropRef = useRef(null);
+// Refs to directly access the DOM elements for the dropdowns and buttons
+const categoryButtonRef = useRef(null); // Ref for the category dropdown button
+const categoryDropRef = useRef(null); // Ref for the category dropdown menu
+const userButtonRef = useRef(null); // Ref for the user dropdown button
+const userDropRef = useRef(null); // Ref for the user dropdown menu
 
-  // Handle category dropdown toggle
-  const handleCategoryDrop = () => {
-    setIsCategoryOpen((prev) => !prev);
-    setIsUserOpen(false); // Close user dropdown if open
+// Function to toggle the visibility of the category dropdown
+const handleCategoryDrop = () => {
+  setIsCategoryOpen((prev) => !prev); // Toggle category dropdown state
+  setIsUserOpen(false); // Close user dropdown if it was open
+};
+
+// Function to toggle the visibility of the user dropdown
+const handleUserDrop = () => {
+  setIsUserOpen((prev) => !prev); // Toggle user dropdown state
+  setIsCategoryOpen(false); // Close category dropdown if it was open
+};
+
+// Effect hook to close dropdowns when a click happens outside the dropdown or its button
+useEffect(() => {
+  // Function to handle clicks outside the dropdowns and close them
+  const handleClickOutside = (event) => {
+    // Check if the click was outside the category dropdown and its button
+    if (
+      categoryDropRef.current &&
+      !categoryDropRef.current.contains(event.target) &&
+      categoryButtonRef.current &&
+      !categoryButtonRef.current.contains(event.target)
+    ) {
+      setIsCategoryOpen(false); // Close the category dropdown
+    }
+
+    // Check if the click was outside the user dropdown and its button
+    if (
+      userDropRef.current &&
+      !userDropRef.current.contains(event.target) &&
+      userButtonRef.current &&
+      !userButtonRef.current.contains(event.target)
+    ) {
+      setIsUserOpen(false); // Close the user dropdown
+    }
   };
 
-  // Handle user dropdown toggle
-  const handleUserDrop = () => {
-    setIsUserOpen((prev) => !prev);
-    setIsCategoryOpen(false); // Close category dropdown if open
+  // Add event listener to detect clicks outside the dropdowns
+  document.addEventListener("mousedown", handleClickOutside);
+
+  // Cleanup function to remove the event listener when the component unmounts
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
   };
+}, []); // Empty dependency array to run only once on mount and unmount
 
-  // Close dropdowns if clicked outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        categoryDropRef.current &&
-        !categoryDropRef.current.contains(event.target) &&
-        categoryButtonRef.current &&
-        !categoryButtonRef.current.contains(event.target)
-      ) {
-        setIsCategoryOpen(false);
-      }
-      if (
-        userDropRef.current &&
-        !userDropRef.current.contains(event.target) &&
-        userButtonRef.current &&
-        !userButtonRef.current.contains(event.target)
-      ) {
-        setIsUserOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   return (
     <>
       {/* Header Part Start */}
       <div className="w-full">
-    <Container className={"max-w-headerContainer py-[30px]"}>
-      <Flex>
-        <div className="w-logoW">
-          <a href="#">
-            <Image imgSrc={Logo} />
-          </a>
-        </div>
-        <div className="w-menuW">
-<nav className="">
- <ul className="flex gap-x-10">
-
-   <Link to="/" className="text-sm duration-300 font-dm text-menuText hover:font-bold hover:text-menuTextHover hover:ease-in-out ">Home</Link>
-   <Link to="/about" className="text-sm duration-300 font-dm text-menuText hover:font-bold hover:text-menuTextHover hover:ease-in-out ">About</Link>
-   <Link to="/shop" className="text-sm duration-300 font-dm text-menuText hover:font-bold hover:text-menuTextHover hover:ease-in-out ">Shop</Link>
-   <Link to="/contacts" className="text-sm duration-300 font-dm text-menuText hover:font-bold hover:text-menuTextHover hover:ease-in-out ">Contacts</Link>
-   
-  
-
-
- </ul>
-</nav>
-        </div>
-      </Flex>
-    </Container>
-  </div>
+        <Container className={"max-w-headerContainer py-[30px]"}>
+          <Flex>
+            <div className="w-logoW">
+              <a href="#">
+                <Image imgSrc={Logo} />
+              </a>
+            </div>
+            <div className="w-menuW">
+              <nav className="">
+                <ul className="flex gap-x-10">
+                  <Link
+                    to="/"
+                    className="text-sm duration-300 font-dm text-menuText hover:font-bold hover:text-menuTextHover hover:ease-in-out "
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    to="/about"
+                    className="text-sm duration-300 font-dm text-menuText hover:font-bold hover:text-menuTextHover hover:ease-in-out "
+                  >
+                    About
+                  </Link>
+                  <Link
+                    to="/shop"
+                    className="text-sm duration-300 font-dm text-menuText hover:font-bold hover:text-menuTextHover hover:ease-in-out "
+                  >
+                    Shop
+                  </Link>
+                  <Link
+                    to="/contacts"
+                    className="text-sm duration-300 font-dm text-menuText hover:font-bold hover:text-menuTextHover hover:ease-in-out "
+                  >
+                    Contacts
+                  </Link>
+                </ul>
+              </nav>
+            </div>
+          </Flex>
+        </Container>
+      </div>
       {/* Header Part End */}
 
       {/* Category and Search Part Start */}
@@ -112,24 +134,34 @@ const Header = () => {
                 />
               </button>
               {/* Category Dropdown Menu */}
-              <SlideDown className="absolute left-0 z-10 w-8/12 bg-white rounded-md shadow-lg">
+              <div className="absolute left-0 z-10 w-8/12 bg-white rounded-md shadow-lg">
                 {isCategoryOpen && (
                   <div ref={categoryDropRef}>
-                    <ul className="p-4">
-                      {["Category 1", "Category 2", "Category 3", "Category 4", "Category 5"].map(
-                        (category, index) => (
-                          <li
-                            key={index}
-                            className="py-2 transition-all duration-300 ease-in-out border-white hover:text-base hover:font-bold"
-                          >
-                            {category}
-                          </li>
-                        )
-                      )}
-                    </ul>
+                    <motion.ul
+                      initial={{ y: 30, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      className="absolute top-1 z-50 bg-white w-auto text-[#767676] h-auto p-4 pb-6 rounded-lg"
+                    >
+                      <li className="px-4 py-1 text-black font-dm duration-300 border-b-[1px]  border-b-transparent hover:border-b-black cursor-pointer border-b-gray-400 hover:font-bold">
+                        Accessories
+                      </li>
+                      <li className="px-4 py-1 text-black font-dm duration-300 border-b-[1px]  border-b-transparent hover:border-b-black  cursor-pointer border-b-gray-400 hover:font-bold">
+                        Furniture
+                      </li>
+                      <li className="px-4 py-1 text-black duration-300 font-dm border-b-[1px]  border-b-transparent hover:border-b-black  cursor-pointer border-b-gray-400 hover:font-bold">
+                        Electronics
+                      </li>
+                      <li className="px-4 py-1 text-black font-dm duration-300 border-b-[1px]  border-b-transparent hover:border-b-black  cursor-pointer border-b-gray-400 hover:font-bold">
+                        Clothes
+                      </li>
+                      <li className="px-4 py-1 text-black font-dm duration-300 border-b-[1px]  border-b-transparent hover:border-b-black  cursor-pointer border-b-gray-400 hover:font-bold">
+                        Bags
+                      </li>
+                    </motion.ul>
                   </div>
                 )}
-              </SlideDown>
+              </div>
             </div>
 
             {/* Search Bar */}
@@ -156,22 +188,28 @@ const Header = () => {
                     <VscTriangleDown className="text-lg" />
                   </button>
                   {/* User Dropdown Menu */}
-                  <SlideDown className="absolute right-0 z-10 w-40 bg-white rounded-md shadow-lg">
+                  <div className="absolute right-0 z-10 w-40 bg-white rounded-md shadow-lg">
                     {isUserOpen && (
                       <div ref={userDropRef}>
-                        <ul className="p-2">
-                          {["Profile", "Sign Up", "Login"].map((item, index) => (
-                            <li
-                              key={index}
-                              className="py-2 cursor-pointer hover:bg-gray-100"
-                            >
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
+                        <motion.ul
+                          initial={{ y: 30, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ duration: 0.5 }}
+                          className="absolute z-50 w-auto h-auto p-5 pb-6 text-black bg-white rounded-lg text top-1"
+                        >
+                          <li className="text-black font-dm px-4 py-1 border-b-[1px]  border-b-transparent hover:border-b-black hover:font-bold duration-300 cursor-pointer">
+                            Login
+                          </li>
+                          <li className="text-black font-dm px-4 py-1 border-b-[1px] border-b-transparent  hover:border-b-black hover:font-bold duration-300 cursor-pointer">
+                            Sign Up
+                          </li>
+                          <li className="text-black font-dm px-4 py-1 border-b-[1px] border-b-transparent hover:border-b-black hover:font-bold duration-300 cursor-pointer">
+                            Profile
+                          </li>
+                        </motion.ul>
                       </div>
                     )}
-                  </SlideDown>
+                  </div>
                 </div>
 
                 {/* Cart Icon */}
