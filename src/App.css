@@ -1,6 +1,10 @@
-.slick-prev:before,
-.slick-next:before {
-  content: ""; /* Remove default Slick arrow */
+
+.slick-prev:before {
+   content: "" !important; /* Remove default Slick arrow */
+}
+
+.slick-next:before { 
+  content: "" !important; /* Remove default Slick arrow */
 }
 .custom-arrow {
     z-index: 20; /* Ensure it's visible */

@@ -25,6 +25,7 @@ function PrevArrow(props) {
         justifyContent: "center",
         alignItems: "center",
         position: "absolute",
+        zIndex: 20,
         top: "48%",
        left: "-5%",
         

@@ -10,6 +10,8 @@ import { VscTriangleDown } from "react-icons/vsc";
 import { FaCartShopping  } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
+
 
 const Header = () => {
 // State variables to manage the open/close status of the dropdowns
@@ -68,7 +70,7 @@ useEffect(() => {
   };
 }, []); // Empty dependency array to run only once on mount and unmount
 
-
+const totalQuantity = useSelector(state => state.cart.totalQuantity);
   return (
     <>
       {/* Header Part Start */}
@@ -213,8 +215,12 @@ useEffect(() => {
                 </div>
 
                 {/* Cart Icon */}
-                <div>
-                  <FaCartShopping className="mt-2 text-lg" />
+                <div className="relative">
+                 <Link to="/cart">
+                 <FaCartShopping className="mt-2 text-lg" />
+                 </Link>
+                  <div className="absolute flex items-center h-4 p-1 text-xs font-bold text-white bg-black rounded-full jus font-dm top-5 -right-3"> <span>{totalQuantity}</span></div>
+                  
                 </div>
               </Flex>
             </div>
